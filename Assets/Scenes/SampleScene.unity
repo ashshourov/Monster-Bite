@@ -344,7 +344,6 @@ GameObject:
   m_Component:
   - component: {fileID: 568495147}
   - component: {fileID: 568495148}
-  - component: {fileID: 568495149}
   m_Layer: 0
   m_Name: FingerTip
   m_TagString: Untagged
@@ -403,21 +402,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.39
---- !u!114 &568495149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568495146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594fe576f1152cf4bbcf5f8443da0518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  handController: {fileID: 1593780099}
-  monsterController: {fileID: 592129303}
-  nextSceneName: 
 --- !u!1 &592129300
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,10 +513,15 @@ MonoBehaviour:
   fingerTip: {fileID: 568495147}
   ring: {fileID: 1868264701}
   ringRenderer: {fileID: 0}
-  alertDistance: 1
-  alertCloseDuration: 1.25
+  alertDistance: 1.25
+  alertCloseDuration: 0.79
+  alertOpenDuration: 0.3
   mouthCountdownDuration: 2
   biteCloseDuration: 0.12
+  biteThresholdFrameOffset: 1
+  chompOpenDuration: 0.81
+  chompCloseDuration: 0.06
+  chompOpenFrameOffset: 2
   ringVisibleMinFrameIndex: 5
   frames:
   - mouthSprite: {fileID: 504100763681893258, guid: 48018865cbbde3149a5594e861854889, type: 3}
@@ -880,6 +869,7 @@ GameObject:
   - component: {fileID: 1593780097}
   - component: {fileID: 1593780096}
   - component: {fileID: 1593780099}
+  - component: {fileID: 1593780100}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -1006,11 +996,27 @@ MonoBehaviour:
   handWithRing: {fileID: -1076203885879361959, guid: b026a65e6c1bf054bb700bfac37b1192, type: 3}
   handCut: {fileID: -8883493784244866641, guid: 9938a94119a47f246a7ab7d249e20ff7, type: 3}
   detachedFingerSprite: {fileID: 3919975495964490254, guid: e015813c1dfd09347b56782026128a0f, type: 3}
-  detachedFingerSpawnPoint: {fileID: 1868264701}
+  detachedFingerSpawnPoint: {fileID: 0}
   detachedFingerGravity: 2.5
   detachedFingerSpin: 220
   destroyDetachedFingerAfter: 3
   detachedFingerScaleMultiplier: 0.7
+--- !u!114 &1593780100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593780095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594fe576f1152cf4bbcf5f8443da0518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  handController: {fileID: 1593780099}
+  monsterController: {fileID: 592129303}
+  nextSceneName: 
+  delayBeforeNextLevel: 1.5
 --- !u!1 &1732529881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1254,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1208040086343421634, guid: 465fd5850d1df52498d77bcbdb80eb2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1323,7 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5fd317c4018a64188f71d38fd5b80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RingCollector
-  gameManager: {fileID: 568495149}
+  gameManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

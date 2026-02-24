@@ -1,12 +1,14 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Needed to restart game
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public HandController handController;
     public MonsterController monsterController;
+    
     [Header("Scene Flow")]
-    public string nextSceneName = ""; // Optional. If empty, loads next build-index scene.
+    public string nextSceneName = ""; 
+    public float delayBeforeNextLevel = 1.5f; // Added a delay so you can see the sprites!
 
     private bool gameEnded = false;
 
@@ -26,37 +28,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // --- THIS IS WHAT THE AGENT FORGOT ---
+    // This detects the physics collision between the finger and the ring
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (gameEnded) return;
+
+        // If the finger touches the object tagged "Ring"
+        if (other.CompareTag("Ring"))
+        {
+            TryCollectRing(other.gameObject);
+        }
+    }
+    // -------------------------------------
+
     public void TryCollectRing(GameObject ringObject)
     {
         if (gameEnded) return;
 
-        Debug.Log("TryCollectRing called. Checking conditions...");
-        Debug.Log($"  - monsterController is null: {monsterController == null}");
-        Debug.Log($"  - handController is null: {handController == null}");
-        
-        if (monsterController == null)
-        {
-            Debug.LogError("TryCollectRing: MonsterController is null!");
-            return;
-        }
+        if (monsterController == null) return;
         
         bool canTakeRing = monsterController.CanCollectRingNow();
-        Debug.Log($"  - CanCollectRingNow: {canTakeRing}");
-        Debug.Log($"  - IsTimerRunning: {monsterController.IsTimerRunning}");
-        Debug.Log($"  - CountdownTimer: {monsterController.RemainingTime}");
-        Debug.Log($"  - FingerInsideMouth: {monsterController.IsFingerInsideMouth}");
 
         if (canTakeRing)
         {
-            Debug.Log("✓ Ring collection SUCCESSFUL! Hand sprite changing now...");
             if (handController != null)
             {
                 handController.CollectRing();
-                Debug.Log("HandController.CollectRing() called");
-            }
-            else
-            {
-                Debug.LogError("HandController is null! Cannot change sprite!");
             }
             
             monsterController.OnRingCollected();
@@ -64,7 +62,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("✗ Ring touched but timer not active or expired. Conditions not met for collection.");
+            // Finger touched ring while mouth is closed — monster bites!
+            Debug.Log("Ring touched with mouth closed — BITE!");
+            monsterController.TriggerBite();
         }
     }
 
@@ -73,15 +73,29 @@ public class GameManager : MonoBehaviour
         if (gameEnded) return;
 
         gameEnded = true;
-        handController.GetBitten();
+        
+        if (handController != null)
+        {
+            handController.GetBitten();
+        }
+        
         Debug.Log("GAME OVER: Monster bite.");
+        
+        // Optional: Restart the level after getting bitten
+        // Invoke("RestartLevel", delayBeforeNextLevel); 
     }
 
     void WinLevel()
     {
         gameEnded = true;
-        Debug.Log("LEVEL WON! Loading next level...");
+        Debug.Log("LEVEL WON! Waiting to load next level...");
 
+        // Invoke calls the function after a delay, so you can see the ring in your hand!
+        Invoke("LoadNextScene", delayBeforeNextLevel);
+    }
+
+    void LoadNextScene()
+    {
         if (!string.IsNullOrEmpty(nextSceneName))
         {
             SceneManager.LoadScene(nextSceneName);
@@ -98,7 +112,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("No next scene in Build Settings. Staying on current level.");
-            gameEnded = false;
+            gameEnded = false; // Reset if there's nowhere to go
         }
     }
 
