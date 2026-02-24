@@ -128,14 +128,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490572426}
-  - component: {fileID: 490572427}
   m_Layer: 0
   m_Name: MouthZone
   m_TagString: MouthZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &490572426
 Transform:
   m_ObjectHideFlags: 0
@@ -145,58 +144,12 @@ Transform:
   m_GameObject: {fileID: 490572425}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.332, y: 0.666, z: 0}
+  m_LocalPosition: {x: -0.332, y: 0.721, z: 0}
   m_LocalScale: {x: 1, y: 0.235, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 592129301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &490572427
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490572425}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +287,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &568495146
+--- !u!1 &565147310
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,66 +295,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 568495147}
-  - component: {fileID: 568495148}
+  - component: {fileID: 565147311}
   m_Layer: 0
-  m_Name: FingerTip
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &568495147
+--- !u!4 &565147311
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568495146}
+  m_GameObject: {fileID: 565147310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.659, y: 4.394, z: 0}
-  m_LocalScale: {x: 0.78787, y: 0.78787, z: 0.78787}
+  m_LocalPosition: {x: -1.58, y: 3.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1593780098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &568495148
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568495146}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.39
 --- !u!1 &592129300
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +329,7 @@ GameObject:
   - component: {fileID: 592129301}
   - component: {fileID: 592129302}
   - component: {fileID: 592129303}
+  - component: {fileID: 592129304}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -496,7 +413,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &592129303
+--- !u!95 &592129303
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592129300}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22a47ebf666477345a4a807b490ef778, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &592129304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -505,45 +444,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 592129300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ead04e212277445bf93105103aa3bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 553aabaf214d47c40be7fa0d4e3ec219, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  monsterRenderer: {fileID: 592129302}
-  eyeSocket: {fileID: 1319329013}
-  fingerTip: {fileID: 568495147}
-  ring: {fileID: 1868264701}
-  ringRenderer: {fileID: 0}
-  alertDistance: 1.25
-  alertCloseDuration: 0.79
-  alertOpenDuration: 0.3
-  mouthCountdownDuration: 2
-  biteCloseDuration: 0.12
-  biteThresholdFrameOffset: 1
-  chompOpenDuration: 0.81
-  chompCloseDuration: 0.06
-  chompOpenFrameOffset: 2
-  ringVisibleMinFrameIndex: 5
-  frames:
-  - mouthSprite: {fileID: 504100763681893258, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.648, y: 1.193}
-  - mouthSprite: {fileID: 2716807758413871117, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.648, y: 1.193}
-  - mouthSprite: {fileID: 1156270658187739982, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.648, y: 1.193}
-  - mouthSprite: {fileID: 6715398498452155866, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.675, y: 1.22}
-  - mouthSprite: {fileID: -4963890195264364115, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.6591, y: 1.2736}
-  - mouthSprite: {fileID: -1021258399208323414, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.6591, y: 1.4}
-  - mouthSprite: {fileID: -3676474177854002631, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.6591, y: 1.519}
-  - mouthSprite: {fileID: 5512662653298283793, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.675, y: 1.495}
-  - mouthSprite: {fileID: -576973994291363734, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.675, y: 1.431}
-  - mouthSprite: {fileID: -5110138703092868123, guid: 48018865cbbde3149a5594e861854889, type: 3}
-    eyeSocketLocalPosition: {x: -0.695, y: 1.43}
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterBehaviour
+  mouthZone: {fileID: 490572426}
+  minDistanceToMouth: 1
+  biteDistance: 0.4
+  fingerTip: {fileID: 565147311}
+  touch: {fileID: 1593780099}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 1319329012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.675, y: 1.22, z: 0}
+  m_LocalPosition: {x: -0.668, y: 1.228, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -855,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df49c591a63794344996e5e208070d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeTracker
-  target: {fileID: 568495147}
-  eyeRadius: 0.6
+  target: {fileID: 565147311}
+  eyeRadius: 0.3
 --- !u!1 &1593780095
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,9 +775,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1593780098}
   - component: {fileID: 1593780097}
-  - component: {fileID: 1593780096}
-  - component: {fileID: 1593780099}
   - component: {fileID: 1593780100}
+  - component: {fileID: 1593780099}
+  - component: {fileID: 1593780101}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -877,33 +785,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &1593780096
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593780095}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!212 &1593780097
 SpriteRenderer:
   serializedVersion: 2
@@ -976,7 +857,7 @@ Transform:
   m_LocalScale: {x: 0.111056425, y: 0.111056425, z: 0.111056425}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 568495147}
+  - {fileID: 565147311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1593780099
@@ -988,35 +869,85 @@ MonoBehaviour:
   m_GameObject: {fileID: 1593780095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c947d26304a4af4cad15ba479f97b04, type: 3}
+  m_Script: {fileID: 11500000, guid: 987607167e6f26c4ab5267779a329e42, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HandController
-  handRenderer: {fileID: 1593780097}
-  handOpen: {fileID: 5670014757054000278, guid: 7a46c8380627f964f82787dbd8fd6036, type: 3}
-  handWithRing: {fileID: -1076203885879361959, guid: b026a65e6c1bf054bb700bfac37b1192, type: 3}
-  handCut: {fileID: -8883493784244866641, guid: 9938a94119a47f246a7ab7d249e20ff7, type: 3}
-  detachedFingerSprite: {fileID: 3919975495964490254, guid: e015813c1dfd09347b56782026128a0f, type: 3}
-  detachedFingerSpawnPoint: {fileID: 0}
-  detachedFingerGravity: 2.5
-  detachedFingerSpin: 220
-  destroyDetachedFingerAfter: 3
-  detachedFingerScaleMultiplier: 0.7
---- !u!114 &1593780100
-MonoBehaviour:
+  m_EditorClassIdentifier: Assembly-CSharp::TouchController
+  ringFinger: {fileID: -1076203885879361959, guid: b026a65e6c1bf054bb700bfac37b1192, type: 3}
+  cutFinger: {fileID: -8883493784244866641, guid: 9938a94119a47f246a7ab7d249e20ff7, type: 3}
+  monster: {fileID: 592129304}
+--- !u!61 &1593780100
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593780095}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 594fe576f1152cf4bbcf5f8443da0518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  handController: {fileID: 1593780099}
-  monsterController: {fileID: 592129303}
-  nextSceneName: 
-  delayBeforeNextLevel: 1.5
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -1.4593742, y: 0.9723058}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.06, y: 9.5}
+    newSize: {x: 5.06, y: 9.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.5918398, y: 4.370944}
+  m_EdgeRadius: 0
+--- !u!50 &1593780101
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593780095}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1732529881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,7 +1129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1868264701}
   - component: {fileID: 1868264700}
-  - component: {fileID: 1868264703}
   - component: {fileID: 1868264702}
   m_Layer: 0
   m_Name: Ring
@@ -1311,25 +1241,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.88
---- !u!114 &1868264703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868264699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5fd317c4018a64188f71d38fd5b80a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RingCollector
-  gameManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
