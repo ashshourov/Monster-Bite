@@ -9,6 +9,8 @@ public class TouchController : MonoBehaviour
     public Sprite cutFinger;
     public MonsterBehaviour monster;
 
+    public GameObject fingerCut;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -31,10 +33,12 @@ public class TouchController : MonoBehaviour
         monster.playBite();
         gameObject.GetComponent<SpriteRenderer>().sprite = ringFinger;
     }
-
+    public float force;
     public void CutFinger()
     {
         gameObject.GetComponent <SpriteRenderer>().sprite = cutFinger;
+        fingerCut.SetActive(true);
+        fingerCut.GetComponent<Rigidbody2D>().AddForce((-transform.right + transform.up) * force);
     }
 
     void Update()
