@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     
     [Header("Scene Flow")]
     public string nextSceneName = ""; 
-    public float delayBeforeNextLevel = 1.5f; // Added a delay so you can see the sprites!
+    public float delayBeforeNextLevel = 1.5f;
+
+    [Header("UI")]
+    public TryAgainUI tryAgainUI;
 
     private bool gameEnded = false;
 
@@ -39,8 +42,37 @@ public class GameManager : MonoBehaviour
         {
             TryCollectRing(other.gameObject);
         }
+
+        // If the finger enters the MouthZone while mouth is dangerous → instant bite
+        if (other.CompareTag("MouthZone"))
+        {
+            TryMouthZoneBite();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (gameEnded) return;
+
+        // If the finger is resting inside MouthZone and mouth becomes dangerous → bite
+        if (other.CompareTag("MouthZone"))
+        {
+            TryMouthZoneBite();
+        }
     }
     // -------------------------------------
+
+    void TryMouthZoneBite()
+    {
+        if (gameEnded) return;
+        if (monsterController == null) return;
+
+        if (monsterController.IsMouthDangerous())
+        {
+            Debug.Log("Finger in MouthZone while mouth is dangerous — BITE!");
+            monsterController.TriggerBite();
+        }
+    }
 
     public void TryCollectRing(GameObject ringObject)
     {
@@ -80,18 +112,22 @@ public class GameManager : MonoBehaviour
         }
         
         Debug.Log("GAME OVER: Monster bite.");
-        
-        // Optional: Restart the level after getting bitten
-        // Invoke("RestartLevel", delayBeforeNextLevel); 
+
+        if (tryAgainUI != null)
+        {
+            tryAgainUI.ShowAfterDelay();
+        }
     }
 
     void WinLevel()
     {
         gameEnded = true;
-        Debug.Log("LEVEL WON! Waiting to load next level...");
+        Debug.Log("LEVEL WON!");
 
-        // Invoke calls the function after a delay, so you can see the ring in your hand!
-        Invoke("LoadNextScene", delayBeforeNextLevel);
+        if (tryAgainUI != null)
+        {
+            tryAgainUI.ShowAfterDelay();
+        }
     }
 
     void LoadNextScene()

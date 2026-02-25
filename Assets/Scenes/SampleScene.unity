@@ -522,6 +522,10 @@ MonoBehaviour:
   chompOpenDuration: 0.81
   chompCloseDuration: 0.06
   chompOpenFrameOffset: 2
+  biteChompCount: 3
+  biteChompOpenDuration: 0.125
+  biteChompCloseDuration: 0.07
+  biteChompOpenFrameOffset: 7
   ringVisibleMinFrameIndex: 5
   frames:
   - mouthSprite: {fileID: 504100763681893258, guid: 48018865cbbde3149a5594e861854889, type: 3}
@@ -1017,6 +1021,7 @@ MonoBehaviour:
   monsterController: {fileID: 592129303}
   nextSceneName: 
   delayBeforeNextLevel: 1.5
+  tryAgainUI: {fileID: 0}
 --- !u!1 &1732529881
 GameObject:
   m_ObjectHideFlags: 0

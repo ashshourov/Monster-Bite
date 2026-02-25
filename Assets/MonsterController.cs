@@ -22,6 +22,10 @@ public class MonsterController : MonoBehaviour
     public float chompOpenDuration = 0.08f;
     public float chompCloseDuration = 0.06f;
     public int chompOpenFrameOffset = 2;
+    public int biteChompCount = 3;
+    public float biteChompOpenDuration = 0.06f;
+    public float biteChompCloseDuration = 0.04f;
+    public int biteChompOpenFrameOffset = 3;
 
     public int ringVisibleMinFrameIndex = 5;
 
@@ -42,6 +46,7 @@ public class MonsterController : MonoBehaviour
     private int alertOpenStartFrame = -1;
     private bool isChompBite = false;
     private float chompTimer = 0f;
+    private int biteChompIndex = 0;
 
     public event Action BiteTriggered;
 
@@ -56,7 +61,6 @@ public class MonsterController : MonoBehaviour
     public MonsterFrame[] frames;
 
     public bool IsFingerInsideMouth => fingerInsideMouth;
-    public bool IsTimerRunning => fingerInsideMouth && !biteTriggered && !ringCollected;
     public float RemainingTime => Mathf.Max(0f, countdownTimer);
 
     void Awake()
@@ -99,52 +103,38 @@ public class MonsterController : MonoBehaviour
         {
             if (biteAnimationPlaying)
             {
-                if (isChompBite)
-                {
-                    // Chomp animation: open mouth slightly then snap shut
-                    chompTimer += Time.deltaTime;
-                    int chompPeakFrame = Mathf.Min(GetClosedFrameIndex() + chompOpenFrameOffset, GetOpenFrameIndex());
+                chompTimer += Time.deltaTime;
+                int peakFrame = Mathf.Min(GetClosedFrameIndex() + biteChompOpenFrameOffset, GetOpenFrameIndex());
+                float singleChompDuration = biteChompOpenDuration + biteChompCloseDuration;
+                float totalDuration = singleChompDuration * biteChompCount;
 
-                    if (chompTimer <= chompOpenDuration)
+                if (chompTimer < totalDuration)
+                {
+                    // Determine which chomp cycle we're in
+                    float timeInCycle = chompTimer % singleChompDuration;
+
+                    if (timeInCycle < biteChompOpenDuration)
                     {
-                        // Phase 1: open slightly
-                        float t = Mathf.Clamp01(chompTimer / Mathf.Max(0.01f, chompOpenDuration));
-                        SetFrame(Mathf.RoundToInt(Mathf.Lerp(GetClosedFrameIndex(), chompPeakFrame, t)));
+                        // Opening phase of chomp
+                        float t = Mathf.Clamp01(timeInCycle / Mathf.Max(0.01f, biteChompOpenDuration));
+                        SetFrame(Mathf.RoundToInt(Mathf.Lerp(GetClosedFrameIndex(), peakFrame, t)));
                     }
                     else
                     {
-                        // Phase 2: snap shut
-                        float elapsed = chompTimer - chompOpenDuration;
-                        float t = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, chompCloseDuration));
-                        SetFrame(Mathf.RoundToInt(Mathf.Lerp(chompPeakFrame, GetClosedFrameIndex(), t)));
-
-                        if (t >= 1f)
-                        {
-                            biteAnimationPlaying = false;
-                            if (!biteEventRaised)
-                            {
-                                biteEventRaised = true;
-                                BiteTriggered?.Invoke();
-                            }
-                        }
+                        // Closing phase of chomp
+                        float t = Mathf.Clamp01((timeInCycle - biteChompOpenDuration) / Mathf.Max(0.01f, biteChompCloseDuration));
+                        SetFrame(Mathf.RoundToInt(Mathf.Lerp(peakFrame, GetClosedFrameIndex(), t)));
                     }
                 }
                 else
                 {
-                    // Normal bite: close from current position
-                    biteTimer += Time.deltaTime;
-                    float t = Mathf.Clamp01(biteTimer / Mathf.Max(0.01f, biteCloseDuration));
-                    int frameIndex = Mathf.RoundToInt(Mathf.Lerp(biteStartFrame, GetClosedFrameIndex(), t));
-                    SetFrame(frameIndex);
-
-                    if (t >= 1f)
+                    // All chomps done — hold closed and fire event
+                    SetFrame(GetClosedFrameIndex());
+                    biteAnimationPlaying = false;
+                    if (!biteEventRaised)
                     {
-                        biteAnimationPlaying = false;
-                        if (!biteEventRaised)
-                        {
-                            biteEventRaised = true;
-                            BiteTriggered?.Invoke();
-                        }
+                        biteEventRaised = true;
+                        BiteTriggered?.Invoke();
                     }
                 }
             }
@@ -153,25 +143,13 @@ public class MonsterController : MonoBehaviour
             return;
         }
 
-        if (fingerInsideMouth)
+        if (ringCollected)
         {
-            countdownTimer -= Time.deltaTime;
-            if (countdownTimer <= 0f)
-            {
-                countdownTimer = 0f;
-                TriggerBite();
-                return;
-            }
-
-            float remainingPercent = mouthCountdownDuration <= 0f ? 0f : countdownTimer / mouthCountdownDuration;
-            int openFrame = GetOpenFrameIndex();
-            int almostClosedFrame = GetAlmostClosedFrameIndex();
-            int frameIndex = Mathf.RoundToInt(Mathf.Lerp(almostClosedFrame, openFrame, remainingPercent));
-            SetFrame(frameIndex);
             UpdateRingVisibility();
             return;
         }
 
+        // --- Distance-based alert mouth closing/opening ---
         float distanceToRing = Vector2.Distance(fingerTip.position, ring.position);
 
         // --- Smooth opening animation when finger leaves alert zone ---
@@ -233,6 +211,13 @@ public class MonsterController : MonoBehaviour
         int alertFrame = Mathf.RoundToInt(Mathf.Lerp(alertStartFrame, GetClosedFrameIndex(), alertT));
         SetFrame(alertFrame);
 
+        // Mouth fully closed AND finger is inside MouthZone → bite!
+        if (alertT >= 1f && fingerInsideMouth)
+        {
+            TriggerBite();
+            return;
+        }
+
         UpdateRingVisibility();
     }
 
@@ -271,8 +256,12 @@ public class MonsterController : MonoBehaviour
         if (biteTriggered || ringCollected) return;
 
         fingerInsideMouth = true;
-        countdownTimer = Mathf.Max(0f, mouthCountdownDuration);
-        SetFrame(GetOpenFrameIndex());
+
+        // If mouth is already fully closed when finger enters → immediate bite
+        if (IsMouthFullyClosed())
+        {
+            TriggerBite();
+        }
     }
 
     public void NotifyFingerExitedMouth()
@@ -294,25 +283,28 @@ public class MonsterController : MonoBehaviour
     {
         if (biteTriggered || ringCollected) return false;
 
-        // During mouth-inside countdown: collectible while timer > 0
-        if (fingerInsideMouth && countdownTimer > 0f) return true;
-
-        // During alert closing: collectible if mouth hasn't reached near-closed frames
+        // Ring is collectible when the mouth is open enough (not near-closed)
         int biteThreshold = GetClosedFrameIndex() + biteThresholdFrameOffset;
-        if (alertClosingStarted && currentFrameIndex > biteThreshold) return true;
-
-        // During alert opening: always collectible (mouth is opening back up)
-        if (alertOpening) return true;
-
-        // Mouth is fully open and idle — collectible
-        if (!alertClosingStarted && !fingerInsideMouth && currentFrameIndex >= GetOpenFrameIndex()) return true;
-
-        return false;
+        return currentFrameIndex > biteThreshold;
     }
 
     public bool IsMouthFullyClosed()
     {
         return currentFrameIndex >= 0 && currentFrameIndex <= GetClosedFrameIndex();
+    }
+
+    public bool IsMouthDangerous()
+    {
+        // Already biting
+        if (biteTriggered) return true;
+
+        // Mouth is fully closed
+        if (IsMouthFullyClosed()) return true;
+
+        // Alert closing is ≥70% complete
+        if (alertClosingStarted && alertCloseTimer >= alertCloseDuration * 0.7f) return true;
+
+        return false;
     }
 
     public void OnRingCollected()
@@ -335,24 +327,16 @@ public class MonsterController : MonoBehaviour
         countdownTimer = 0f;
         alertClosingStarted = false;
         alertCloseTimer = 0f;
+        alertOpening = false;
         biteEventRaised = false;
-        biteStartFrame = currentFrameIndex >= 0 ? currentFrameIndex : GetOpenFrameIndex();
 
-        if (biteStartFrame <= GetClosedFrameIndex())
-        {
-            // Mouth already closed — play chomp (open slightly then snap shut)
-            isChompBite = true;
-            chompTimer = 0f;
-            biteAnimationPlaying = true;
-        }
-        else
-        {
-            // Normal fast close from current position
-            isChompBite = false;
-            biteAnimationPlaying = true;
-            biteTimer = 0f;
-        }
+        // Always play rapid chomp animation
+        chompTimer = 0f;
+        biteChompIndex = 0;
+        biteAnimationPlaying = true;
 
+        // Snap to closed first so the chomping starts from closed
+        SetFrame(GetClosedFrameIndex());
         UpdateRingVisibility();
     }
 
