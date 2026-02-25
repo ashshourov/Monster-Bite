@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeTracker
   target: {fileID: 565147311}
-  eyeRadius: 0.51
+  eyeRadius: 1
 --- !u!1 &1593780095
 GameObject:
   m_ObjectHideFlags: 0
