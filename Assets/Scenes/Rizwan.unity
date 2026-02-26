@@ -524,7 +524,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 6715398498452155866, guid: 48018865cbbde3149a5594e861854889, type: 3}
+  m_Sprite: {fileID: 504100763681893258, guid: 48018865cbbde3149a5594e861854889, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -573,6 +573,7 @@ MonoBehaviour:
   biteDistance: 0.4
   fingerTip: {fileID: 565147311}
   touch: {fileID: 1593780099}
+  ringObject: {fileID: 1868264699}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1034,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -1.4593742, y: 0.9723058}
+  m_Offset: {x: -1.4214482, y: 2.6330264}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1043,7 +1044,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5918398, y: 4.370944}
+  m_Size: {x: 1.2311912, y: 4.307119}
   m_EdgeRadius: 0
 --- !u!50 &1593780101
 Rigidbody2D:
@@ -1260,7 +1261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1868264700
 SpriteRenderer:
   serializedVersion: 2
