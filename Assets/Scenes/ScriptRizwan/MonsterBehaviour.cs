@@ -9,7 +9,7 @@ public class MonsterBehaviour : MonoBehaviour
     public Transform fingerTip;
     
     [Header("References")]
-    public TouchController touch;
+    public TouchController touch; // ADDED: This fixes the error!
     public GameObject ringObject; 
 
     private Animator animator;
@@ -18,12 +18,8 @@ public class MonsterBehaviour : MonoBehaviour
 
     void Start()
     {
+        // ADDED: This ensures the animator variable isn't empty!
         animator = GetComponent<Animator>();
-
-        if (ringObject == null)
-            Debug.LogWarning("MonsterBehaviour: ringObject is NOT assigned in the Inspector!");
-        else
-            Debug.Log("MonsterBehaviour: ringObject is assigned -> " + ringObject.name);
     }
 
     void Update()
@@ -32,7 +28,7 @@ public class MonsterBehaviour : MonoBehaviour
 
         if(Vector3.Distance(fingerTip.position, mouthZone.position) < minDistanceToMouth)
         {
-            if (!isOpened)
+            if (!isOpened) // Only play it once when entering the zone
             {
                 isOpened = true;
                 animator.Play("Open");
@@ -49,9 +45,6 @@ public class MonsterBehaviour : MonoBehaviour
     {
         if (animator != null) animator.Play("Bite");
         isBitten = true;
-
-        // Fallback: show ring immediately in case the animation event doesn't fire
-        ShowRingInMouth();
     }
 
     public void Bitten()
@@ -60,28 +53,17 @@ public class MonsterBehaviour : MonoBehaviour
         if (Vector3.Distance(fingerTip.position, mouthZone.position) < biteDistance)
         {
             if (touch != null) touch.CutFinger();
-
-            // Hide ring when the bite actually lands
-            HideRingInMouth();
         }
     }
 
     // --- ANIMATION EVENTS ---
     public void ShowRingInMouth()
     {
-        Debug.Log("ShowRingInMouth called | ringObject " + (ringObject != null ? "FOUND" : "NULL"));
-        if (ringObject != null)
-        {
-            ringObject.SetActive(true);
-        }
+        if (ringObject != null) ringObject.SetActive(true);
     }
 
     public void HideRingInMouth()
     {
-        Debug.Log("HideRingInMouth called | ringObject " + (ringObject != null ? "FOUND" : "NULL"));
-        if (ringObject != null)
-        {
-            ringObject.SetActive(false);
-        }
+        if (ringObject != null) ringObject.SetActive(false);
     }
 }
